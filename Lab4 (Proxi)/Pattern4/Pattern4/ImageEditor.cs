@@ -2,20 +2,20 @@
 
 public class ImageEditor
 {
-    private readonly IImage _image;
+    private readonly Image _image;
 
-    public ImageEditor(IImage image)
+    public ImageEditor(Image image)
     {
         _image = image;
     }
 
     public void HandleLeftClick()
     {
-        _image.HandleLeftClick();
+        Console.WriteLine($"Draw board {_image.Width}x{_image.Height} pixels");
     }
 
     public void HandleRightClick()
     {
-        _image.HandleRightClick();
+        Console.WriteLine($"Draw {_image.Pixels.Capacity} pixels");
     }
 }

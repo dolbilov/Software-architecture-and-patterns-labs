@@ -1,20 +1,53 @@
-﻿namespace Pattern4;
+﻿using System.Drawing;
 
-public class CachedImage : IImage
+namespace Pattern4;
+
+public class CachedImage : Image
 {
-    private OriginalImage? _originalImage;
-    public void HandleLeftClick()
+    private RealImage? _originalImage;
+
+    public CachedImage(RealImage image)
     {
-        if (_originalImage == null)
-        {
-            _originalImage = new OriginalImage();
-        }
-        Console.WriteLine("Left click handled by PROXY image");
+        _originalImage = image;
     }
 
-    public void HandleRightClick()
+    public override int Width
     {
-        _originalImage ??= new OriginalImage();
-        Console.WriteLine("Right click handled by PROXY image");
+        get
+        {
+            if (_width == 0)
+            {
+                _width = _originalImage.Width;
+            }
+
+            return _width;
+        }
+    }
+
+    public override int Height
+    {
+        get
+        {
+            if (_height == 0)
+            {
+                _height = _originalImage.Height;
+            }
+
+
+            return _height;
+        }
+    }
+
+    public override List<Color> Pixels
+    {
+        get
+        {
+            if (_pixels.Capacity == 0)
+            {
+                _pixels = _originalImage.Pixels;
+            }
+
+            return _pixels;
+        }
     }
 }
